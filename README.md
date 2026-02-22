@@ -14,28 +14,39 @@ Product size recommendation and fit prediction are critical to improving online 
 
 ## Data
 
-Two publicly available datasets collected from **ModCloth** and **RentTheRunway**, representing the only publicly available fit-related datasets at this time.
+Three datasets support the project pipeline:
 
-Each dataset contains:
+### 1. RentTheRunway (PRIMARY) — 192,544 transactions
+The richest dataset with fit feedback, body measurements, review text, ratings, and rental occasion context. Used for all three phases.
+- **Fit feedback:** Small / Fit / Large
+- **Body measurements:** height, weight, bust size, age, body type
+- **Review data:** text, summary, rating, date
+- **Context:** category, rented-for occasion
 
-- **Ratings and reviews** — customer-written text feedback
-- **Fit feedback** — categorical label (Small / Fit / Large)
-- **Customer and product measurements** — body dimensions and garment sizing
-- **Category information** — product type and classification
+### 2. ModCloth (SECONDARY) — 82,790 transactions
+Fit feedback with different measurement fields. High sparsity on several columns. Used for cross-retailer generalization testing in Phase 3.
+- **Fit feedback:** Small / Fit / Large
+- **Body measurements:** height, hips, bra size, cup size (waist/bust >80% null, dropped)
+- **Review data:** text, summary, quality rating
+- **Context:** category, length feedback
 
-The data is highly sparse: most customers and products have only a single transaction. A "product" refers to a specific size of a product, and sizes are standardized into a single numerical scale preserving order across different sizing conventions.
+### 3. Clothes-Size-Prediction (SUPPLEMENT) — 119,218 rows
+Clean, complete dataset with weight, age, height → size (XXS–XXXL). Used as a baseline benchmark in Phase 2 to compare classifier performance on simple features vs. the richer RentTheRunway feature set.
 
-**Source:** [Misra et al., Decomposing Fit Semantics for Product Size Recommendation in Metric Spaces (2018)](https://www.linkedin.com/in/misrarishabh/)
+**Sources:**
+- Datasets 1 & 2: [Misra et al., Kaggle](https://www.kaggle.com/datasets/rmisra/clothing-fit-dataset-for-size-recommendation)
+- Dataset 3: [Dubey, Kaggle](https://www.kaggle.com/datasets/tourist55/clothessizeprediction)
 
 ## Project Structure
 
 ```
 MACHINE-LEARNING-FINAL-PROJECT/
 ├── README.md
+├── download_data.py                # Downloads all 3 datasets from Kaggle
 │
 ├── Data/
-│   ├── Raw/                        # Original ModCloth & RentTheRunway files
-│   └── Processed/                  # Cleaned data with engineered features
+│   ├── Raw/                        # Original files (JSON + CSV)
+│   └── Processed/                  # Cleaned CSVs from data_cleaning.py
 │
 ├── Notebooks/
 │   │
@@ -61,7 +72,7 @@ MACHINE-LEARNING-FINAL-PROJECT/
 │   └── recommender.ipynb           # Collaborative filtering size recommender
 │
 └── src/
-    └── data_cleaning.py            # Data preprocessing and cleaning utilities
+    └── data_cleaning.py            # Cleans all 3 datasets → Data/Processed/
 ```
 
 ## Methodology
@@ -160,3 +171,6 @@ All notebooks can be executed in **Google Colab** without additional setup.
 
 - Misra, R., Wan, M., & McAuley, J. (2018). *Decomposing Fit Semantics for Product Size Recommendation in Metric Spaces.* In Proceedings of the 12th ACM Conference on Recommender Systems, pp. 422–426.
 - Misra, R., & Grover, J. (2021). *Sculpting Data for ML: The First Act of Machine Learning.* ISBN 9798585463570.
+- James, G., Witten, D., Hastie, T., & Tibshirani, R. *An Introduction to Statistical Learning with Applications in Python.* Springer.
+- Hastie, T., Tibshirani, R., & Friedman, J. *The Elements of Statistical Learning.* Springer.
+- Géron, A. *Hands-On Machine Learning with Scikit-Learn and TensorFlow.* O'Reilly.
