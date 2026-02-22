@@ -1,2 +1,4 @@
 *.json filter=lfs diff=lfs merge=lfs -text
+data/raw/modcloth_final_data.json filter=lfs diff=lfs merge=lfs -text
+data/raw/renttherunway_final_data.json filter=lfs diff=lfs merge=lfs -text
 Data/Raw/renttherunway_final_data.json filter=lfs diff=lfs merge=lfs -text
