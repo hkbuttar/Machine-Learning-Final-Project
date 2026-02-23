@@ -45,9 +45,17 @@ MACHINE-LEARNING-FINAL-PROJECT/
 ├── download_data.py                # Downloads all 3 datasets from Kaggle
 │
 ├── Data/
-│   ├── Raw/                        # Original files (JSON + CSV)
-│   └── Processed/                  # Cleaned CSVs from data_cleaning.py
-│
+│   ├── Raw/
+│   │    ├── final_test.csv
+│   │    ├── modcloth_final_data.json
+│   │    └── renttherunway-final_data.json
+│   │              
+│   └── Processed/
+│        ├── clothes_size_clean.csv
+│        ├── modcloth_clean.csv
+│        ├── renttherunway_clean.csv
+│        └── renttherunway_lda_topics.csv
+│                  
 ├── Notebooks/
 │   │
 │   │  Phase 1 — Unsupervised Exploration
@@ -56,7 +64,6 @@ MACHINE-LEARNING-FINAL-PROJECT/
 │   ├── dbscan.ipynb                # Density-based outlier detection
 │   ├── k-modes.ipynb               # Categorical feature clustering
 │   ├── lda.ipynb                   # Topic modeling on review text
-│   ├── pca.ipynb                   # Principal Components Analysis
 │   ├── t-SNE.ipynb                 # t-SNE visualization
 │   │
 │   │  Phase 2 — Supervised Fit Prediction
@@ -72,7 +79,10 @@ MACHINE-LEARNING-FINAL-PROJECT/
 │   └── recommender.ipynb           # Collaborative filtering size recommender
 │
 └── src/
-    └── data_cleaning.py            # Cleans all 3 datasets → Data/Processed/
+    ├── data_cleaning.py
+    ├── download_data.py
+    ├── pca.py
+    └── t-SNE.py           # Cleans all 3 datasets → Data/Processed/
 ```
 
 ## Methodology
