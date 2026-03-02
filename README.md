@@ -118,6 +118,8 @@ Predict fit outcome (Small / Fit / Large) as a multiclass classification problem
 
 **Models Compared:**
 - Linear SVM and Kernel SVM
+    - Due to the computational complexity of kernel-based SVMs, training and hyperparameter tuning were performed on a stratified subsample of the training data while preserving class proportions. Final evaluation was conducted on the full held-out test set, ensuring fair and consistent comparison across models.
+    - Training and tuning kernel-based Support Vector Machines presented significant computational challenges due to the quadratic to cubic scaling of kernel methods with respect to sample size. Despite using stratified subsampling and parallelized cross-validation, certain fold–parameter combinations exhibited extreme runtimes, with substantial variability across folds. Additional overhead from probability calibration further exacerbated runtime, leading to prohibitively long cross-validation cycles. To ensure tractability, we iteratively reduced the hyperparameter search space, decreased the number of cross-validation folds, and ultimately disabled probability estimation, prioritizing stable model comparison over exhaustive tuning. These adjustments reflect standard applied machine learning practice when working with non-linear kernel methods on large-scale datasets.
 - Classification and Regression Trees (CART)
 - Random Forest, Bagging, Boosting
 - K-Nearest Neighbors
