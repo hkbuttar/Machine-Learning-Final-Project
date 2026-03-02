@@ -101,6 +101,11 @@ Discover latent structure in customer body types, product categories, and review
 
 **Outputs:** Cleaned dataset with cluster labels, PCA components, LDA topic distributions, and engineered features saved to `data/processed/`.
 
+### Missing Data Handling
+During the unsupervised feature discovery phase (DBSCAN, Gaussian Mixture Models, K-modes and K-Means), observations with missing measurement values were excluded prior to model fitting. These clustering methods rely on well-defined distances or likelihoods in the measurement space, and imputing values at this stage would artificially distort the geometry of the data and bias cluster formation. Restricting clustering to complete cases ensured that latent body-type segments were learned from valid, comparable feature vectors, resulting in more meaningful and stable cluster assignments.
+
+For downstream supervised modeling, cluster assignments and topic features were treated as derived inputs rather than core measurements. Because unsupervised models were trained on different subsets of the data, merging their outputs back into the full transaction table naturally reintroduced missing values. Rather than discarding valid observations, missing values were imputed within the modeling pipeline using robust strategies appropriate to each feature type (median imputation for numeric features, most-frequent imputation for categorical features, and constant imputation for binary indicators). This approach preserved sample size, avoided selection bias, and produced models capable of making predictions under realistic conditions where some information may be unavailable.
+
 ### Phase 2 — Supervised Fit Prediction (`02_fit_prediction.ipynb`)
 
 Predict fit outcome (Small / Fit / Large) as a multiclass classification problem with imbalanced labels.
