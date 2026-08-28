@@ -1,0 +1,19 @@
+# Python >= 3.9 (developed on 3.11). Versions pinned to the project virtualenv (venvfit).
+pandas==3.0.1
+numpy==1.26.4
+scikit-learn==1.5.2
+scipy==1.17.1
+matplotlib==3.10.8
+seaborn==0.13.2
+gensim==4.4.0          # LDA topic modeling
+nltk==3.9.3            # text preprocessing
+pyLDAvis==3.4.1        # interactive LDA visualization
+joblib==1.5.3          # model persistence
+
+# Notebook execution
+jupyter
+ipykernel
+
+# Only used by specific notebooks / scripts
+kmodes                 # Notebooks/Unsupervised/K-modes.ipynb
+kagglehub              # src/download_data.py, src/data_cleaning.py

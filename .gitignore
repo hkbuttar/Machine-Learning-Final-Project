@@ -1,0 +1,19 @@
+# Virtual environment (already committed historically; kept out of new commits)
+venvfit/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# Data — regenerable via src/download_data.py + src/data_cleaning.py + the notebooks
+Data/Raw/
+Data/Processed/
+
+# Trained model artifacts — regenerable by running the Phase 2 notebooks
+Models/

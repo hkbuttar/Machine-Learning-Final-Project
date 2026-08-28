@@ -2,4 +2,3 @@
 Data/Raw/modcloth_final_data.json filter=lfs diff=lfs merge=lfs -text
 Data/Raw/renttherunway_final_data.json filter=lfs diff=lfs merge=lfs -text
 *.csv filter=lfs diff=lfs merge=lfs -text
-Models/bagging_simple_classifier.joblib filter=lfs diff=lfs merge=lfs -text
