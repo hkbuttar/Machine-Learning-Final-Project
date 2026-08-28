@@ -14,3 +14,6 @@ __pycache__/
 # Data — regenerable via src/download_data.py + src/data_cleaning.py + the notebooks
 Data/Raw/
 Data/Processed/
+
+# Trained model artifacts — regenerable by running the Phase 2 notebooks
+Models/
