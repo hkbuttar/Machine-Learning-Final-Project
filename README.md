@@ -166,9 +166,34 @@ seaborn
 scipy
 gensim          # LDA topic modeling
 nltk            # text preprocessing
+pyLDAvis        # interactive LDA visualization
+kmodes          # K-Modes categorical clustering
 ```
 
+Pinned versions are in [`requirements.txt`](requirements.txt): `pip install -r requirements.txt`.
 All notebooks can be executed in **Google Colab** without additional setup.
+
+## Reproducing the Pipeline
+
+`Data/` is not version-controlled (see `.gitignore`) — it is regenerated locally.
+Run in this order; each step's outputs feed the next:
+
+1. `python src/download_data.py` — pulls the three raw datasets from Kaggle into `Data/Raw/`
+2. `python src/data_cleaning.py` — writes `Data/Processed/*_clean.csv`
+3. **Phase 1 — unsupervised** (any order): `Notebooks/Unsupervised/DBSCAN.ipynb`,
+   `GMM.ipynb`, `K-means.ipynb`, `LDA.ipynb` → `Data/Processed/Unsupervised_Outputs/`
+4. **Phase 2 — supervised** (any order): the seven notebooks in `Notebooks/Supervised/`
+   (`CART`, `Random_Forest`, `Bagging`, `Naive_Bayes`, `KNN`, `Linear_SVM`, `Kernel_SVM`)
+   → `Models/`, `Figures/Supervised_Outputs/`, `Data/Processed/Supervised_Outputs/`
+5. `Notebooks/Supervised/Model_Comparison.ipynb` — aggregates the Phase 2 probability files
+6. `Notebooks/Ensemble/Recommender.ipynb` — Phase 3 size recommender
+
+**Train/test discipline:** `src/split.py` defines one frozen split (row-level,
+stratified on `fit_label`, `test_size=0.20`, `random_state=42`). Every Phase 1
+model is fit on the *training* partition only and merely *transforms* test rows;
+every Phase 2 notebook takes its train/test partition from the same helper. This
+prevents cluster/topic features from leaking test-set information into the
+classifiers.
 
 ## Syllabus Alignment
 
